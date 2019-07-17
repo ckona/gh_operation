@@ -16,7 +16,7 @@ dir_path = File.dirname(target_file_path)
 git_remote_url = `cd #{dir_path};git remote get-url origin`
 matched = git_remote_url.match(%r{git@github.com:(.*)/(.*).git})
 gh_user_name, gh_repo_name = matched[1], matched[2]
-gh_file_path = target_file_path.match(%r!#{gh_repo_name}/(.*)!)[1]
+gh_file_path = target_file_path.match(%r!#{gh_user_name}/#{gh_repo_name}/(.*)!)[1]
 
 url = "#{gh_user_name}/#{gh_repo_name}/blob/master/#{gh_file_path}"
 

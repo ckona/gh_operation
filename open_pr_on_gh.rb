@@ -17,7 +17,7 @@ commit_hash = commit_hash.chomp.delete('^')
 return puts 'could not find pull request' if commit_hash.include?('00000000')
 
 pr_number = `cd #{dir_path};git log --merges --oneline --reverse --ancestry-path #{commit_hash.chomp}...master | grep 'Merge pull request #' | head -n 1 | cut -d ' ' -f 5 | sed -e 's/#//'`
-return puts 'could not find pull request' if pr_number.nil?
+return puts 'could not find pull request' if pr_number.empty?
 
 git_remote_url = `cd #{dir_path};git remote get-url origin`
 matched = git_remote_url.match(%r{git@github.com:(.*)/(.*).git})
