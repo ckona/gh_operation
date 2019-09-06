@@ -8,13 +8,10 @@
 # - hub command must exist
 # - github repository name equal local repository name
 
-target_file_path = ARGV[0]
+target_file_path = File.absolute_path(ARGV[0])
 line_number = ARGV[1]
-target_file_path = File.absolute_path(target_file_path)
 
-dir_path = File.dirname(target_file_path)
-
-git_remote_url = `cd #{dir_path};git remote get-url origin`
+git_remote_url = `cd #{File.dirname(target_file_path)};git remote get-url origin`
 matched = git_remote_url.match(%r{git@github.com:(.*)/(.*).git})
 gh_user_name, gh_repo_name = matched[1], matched[2]
 
